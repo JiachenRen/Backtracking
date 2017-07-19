@@ -12,7 +12,7 @@ public class Lagrange {
      *
      * @param num the number to be factored
      */
-    public static int[] findSumRB(int num) {
+    static int[] findSumRB(int num) {
         solutions = new int[solutions.length];
         findSumRB(num, solutions.length);
         return solutions;
