@@ -1,10 +1,12 @@
-public class Lagrange {
-    private static int[] solutions = new int[4];
+import java.util.HashMap;
 
-    public static void main(String[] args) {
-        System.out.print("Please enter a number: ");
-        findSumRB((new java.util.Scanner(System.in)).nextInt());
-        for (int i : solutions) System.out.print(i == 0 ? "" : "[" + i + "] ");
+public class Lagrange {
+    private int[] solutions;
+    private HashMap<Integer, Integer> hashMap;
+
+    Lagrange(int numSquares, int numInputs) {
+        hashMap = new HashMap<>(numInputs);
+        solutions = new int[numSquares];
     }
 
     /**
@@ -12,7 +14,7 @@ public class Lagrange {
      *
      * @param num the number to be factored
      */
-    static int[] findSumRB(int num) {
+    int[] findSumRB(int num) {
         solutions = new int[solutions.length];
         findSumRB(num, solutions.length);
         return solutions;
@@ -26,19 +28,24 @@ public class Lagrange {
      * @return whether or not the solution is found.
      * @since July 19th.
      */
-    private static boolean findSumRB(int num, int maxTerms) {
+    private boolean findSumRB(int num, int maxTerms) {
         int sum = 0, index = solutions.length - maxTerms;
         for (int i = index; i < solutions.length; i++) sum += solutions[i];
         if (sum == num) return true;
         else if (maxTerms == 0) return false;
-        for (int i = (int) Math.sqrt(num); i >= 0; i--) {
+        int shortcut = hashMap.getOrDefault(num, -1);
+        if (shortcut != -1) {
+            solutions[index] = shortcut * shortcut;
+            return findSumRB(num - solutions[index], maxTerms - 1);
+        } else for (int i = (int) Math.sqrt(num); i >= 0; i--) {
             solutions[index] = i * i;
-            if (findSumRB(num - solutions[index], maxTerms - 1))
+            if (findSumRB(num - solutions[index], maxTerms - 1)) {
+                hashMap.put(num, i);
                 return true;
+            }
         }
         return false;
     }
-
 
 
 }
