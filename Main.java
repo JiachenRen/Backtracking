@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 /**
  * Created by Jiachen on 7/19/17.
  * For testing the Lagrange backtracking algorithm.
@@ -17,6 +15,10 @@ public class Main {
             System.out.println();
         }
         System.out.println("Time Elapsed: " + (System.currentTimeMillis() - curTime) + " millis");
+        System.out.println("Print table content? (Y/N)");
+        if ((new java.util.Scanner(System.in)).nextLine().compareToIgnoreCase("Y") == 0)
+            for (int key: lagrange.getTable().keySet())
+                System.out.println(key + " -> " + lagrange.getTable().get(key));
     }
 
 }

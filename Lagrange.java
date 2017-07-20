@@ -47,5 +47,12 @@ public class Lagrange {
         return false;
     }
 
+    /**
+     * @return the hash map created for acceleration.
+     */
+    HashMap<Integer, Integer> getTable() {
+        return hashMap;
+    }
+
 
 }
