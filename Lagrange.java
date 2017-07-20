@@ -69,6 +69,4 @@ public class Lagrange {
     HashMap<Integer, Integer> getTable() {
         return hashMap;
     }
-
-
 }
