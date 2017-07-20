@@ -37,7 +37,7 @@ public class Lagrange {
         if (shortcut != -1) {
             solutions[index] = shortcut * shortcut;
             return findSumRB(num - solutions[index], maxTerms - 1);
-        } else for (int i = (int) Math.sqrt(num); i >= 0; i--) {
+        } else for (int i = floorSqrt(num); i >= 0; i--) {
             solutions[index] = i * i;
             if (findSumRB(num - solutions[index], maxTerms - 1)) {
                 hashMap.put(num, i);
@@ -52,8 +52,10 @@ public class Lagrange {
      * that x is unsigned, which in this case is exactly what I am looking for. It
      * beats the native method by about a few milliseconds and is bench marked
      * against 6 other sqrt int algorithms. It is the fastest under all circumstances.
+     * <p>
+     * Bench-marking by Jiachen Ren.
+     * See https://github.com/JiachenRen/Sqrt-Int-Algorithm-Bench-Marking
      *
-     * Bench-marking by Jiachen Ren. See
      * @param x positive int
      * @return floored sqrt of x.
      */
