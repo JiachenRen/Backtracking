@@ -48,6 +48,20 @@ public class Lagrange {
     }
 
     /**
+     * This sqrt int algorithm works by tricking StrictMath.sqrt into believing
+     * that x is unsigned, which in this case is exactly what I am looking for. It
+     * beats the native method by about a few milliseconds and is bench marked
+     * against 6 other sqrt int algorithms. It is the fastest under all circumstances.
+     *
+     * Bench-marking by Jiachen Ren. See
+     * @param x positive int
+     * @return floored sqrt of x.
+     */
+    private static int floorSqrt(int x) {
+        return (int) StrictMath.sqrt(x & 0xffffffffL);
+    }
+
+    /**
      * @return the hash map created for acceleration.
      */
     HashMap<Integer, Integer> getTable() {
